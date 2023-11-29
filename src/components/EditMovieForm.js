@@ -18,7 +18,6 @@ const EditMovieForm = (props) => {
       [e.target.name]: e.target.value,
     });
   };
-  console.log("id", id);
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
