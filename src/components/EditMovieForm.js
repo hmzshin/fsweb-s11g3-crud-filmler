@@ -5,16 +5,12 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 const EditMovieForm = (props) => {
+  const { setMovies, movies } = props;
   const { push } = useHistory();
+  const { id } = useParams();
 
-  const { setMovies } = props;
-  const [movie, setMovie] = useState({
-    title: "",
-    director: "",
-    genre: "",
-    metascore: 0,
-    description: "",
-  });
+  const movieToEdit = movies.filter((movie) => movie.id === id)[0];
+  const [movie, setMovie] = useState(movieToEdit);
 
   const handleChange = (e) => {
     setMovie({
@@ -22,7 +18,7 @@ const EditMovieForm = (props) => {
       [e.target.name]: e.target.value,
     });
   };
-
+  console.log("id", id);
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
@@ -42,7 +38,9 @@ const EditMovieForm = (props) => {
     <div className="bg-white rounded-md shadow flex-1">
       <form onSubmit={handleSubmit}>
         <div className="p-5 pb-3 border-b border-zinc-200">
-          <h4 className="text-xl font-bold">Düzenleniyor <strong>{movie.title}</strong></h4>
+          <h4 className="text-xl font-bold">
+            Düzenleniyor <strong>{movie.title}</strong>
+          </h4>
         </div>
 
         <div className="px-5 py-3">
